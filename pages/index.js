@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,12 +20,17 @@ export default function Home() {
         <div className={styles.grid}>
           <div className={styles.card}>
             <h2>Login</h2>
-            <form>
+            
               <input id= "username" type="text" placeholder="Username" />
               <input id= "password" type="password" placeholder="Password" />
               <br/>
-              <button id = "loginButton" type = "submit">Login</button>
-            </form>
+              <div class = "toggle">
+                <input type="checkbox" id="toggle" />
+
+              </div>
+              <button id = "loginButton">Login</button>
+             <a href="https://nextjs.org">Click here to Sign Up</a>
+            
           </div>
 
         </div>
@@ -45,3 +51,4 @@ export default function Home() {
     </div>
   )
 }
+
