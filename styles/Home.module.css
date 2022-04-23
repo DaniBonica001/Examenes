@@ -86,7 +86,7 @@
   height: 240px;
 }
 
-.card:hover,
+
 .card:focus,
 .card:active {
   border-color: #0070f3;
