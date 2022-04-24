@@ -3,12 +3,11 @@ const fs = require('fs');
 export default function Login(req, res) {
 
     let accounts = JSON.parse(fs.readFileSync("data/accounts.json"));
-    console.log(accounts);
-
-    if(req.method === 'POST'){
+    const {method, body} = req;
+    
+    if(method === 'POST'){
         accounts.forEach(element => {
-            if(element.username === req.body.username && element.password === req.body.password){
-                console.log("Login Successful");
+            if(element.username === body.username && element.password === body.password){
                 res.send({
                     success: true,
                     message: "Login Successful"
@@ -16,15 +15,13 @@ export default function Login(req, res) {
     
             }
         });
+
+        res.send({
+            success: false,
+            message: "Login Failed"
+        })
     }
    
 
-    res.send({
-        success: false,
-        message: "Login Failed"
-    })
-
-
-    
 
 }

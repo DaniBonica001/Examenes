@@ -27,7 +27,7 @@ export default class LoginForm extends react.Component{
         const body = await response.json()
 
         if(body.success){
-            window.location.href = '/signup'
+            window.location.href = '/signUp'
         }
     }
 
@@ -43,7 +43,7 @@ export default class LoginForm extends react.Component{
                     
                 </form>
 
-                <a href="https://nextjs.org">Click here to Sign Up</a>
+                <a href="/signUp">Click here to Sign Up</a>
 
                 <style jsx global>{`
 

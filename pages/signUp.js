@@ -7,15 +7,16 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
 
     let data = {
+        id: 0,
         name: '',
-        email: '',
+        username: '',
         password: '',
     }
 
     async function handleSubmit(event) {
         event.preventDefault();
         //console.log(data)
-        const response = await fetch('/api/accounts/verifyAccount', {
+        const response = await fetch('/api/account/verifyAccount', {
             method: 'POST',
             body: JSON.stringify({ data }),
             headers: {
@@ -24,17 +25,22 @@ export default function Home() {
             }
         })
         const responseData = await response.json();
+        console.log(responseData.success)
+
+        if(responseData.success){
+            window.location.href = '/'
+        }
     }
 
 
     let handleChange = (event) => {
-         console.log(event.target.name);
+
         switch (event.target.name) {
             case 'name':
                 data.name = event.target.value;
                 break;
-            case 'email':
-                data.email = event.target.value;
+            case 'username':
+                data.username = event.target.value;
                 break;
             case 'password':
                 data.password = event.target.value;
@@ -63,9 +69,8 @@ export default function Home() {
                             <h2>Lets' create your account</h2>
 
                             <input id="name" type="text" name='name' placeholder="Full Name" onChange={handleChange} />
-                            <input id="email" type="email" name='email' placeholder="Email" onChange={handleChange} />
+                            <input id="username" type="text" name='username' placeholder="username" onChange={handleChange} />
                             <input id="password" type="password" name='password' placeholder="Password" onChange={handleChange}/>
-                            <input type="password" placeholder=" Confirm Password" />
                             <br />
                             <input type="submit" value="Create" />
                         </div>
