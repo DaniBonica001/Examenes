@@ -2,12 +2,23 @@ const fs = require('fs');
 
 export default function handler(req,res){
 
-    let accounts = JSON.parse(fs.readFileSync("data/accounts.json"));
+    let accounts;
+    let patch = "data/teacher.json";
     const {method, body} = req;
+    const data = body.data;
 
     if(method === 'POST'){
+
+        if(data.toggle1){
+            accounts = JSON.parse(fs.readFileSync(patch));
+            
+        }else{
+            patch = "data/accounts.json";
+            accounts = JSON.parse(fs.readFileSync(patch));
+        }
+
         accounts.forEach(element => {
-            if(element.username === body.username){
+            if(element.username === data.username || data.username === '' || data.password === '' || data.name === ''){
                 res.send({
                     success: false,
                     message: "SingUp Failed"
@@ -18,12 +29,13 @@ export default function handler(req,res){
 
         accounts.push({
             id: accounts.length + 1,
-            name: body.data.name,
-            username: body.data.username,
-            password: body.data.password,
+            name: data.name,
+            username: data.username,
+            password: data.password,
         });
 
-        fs.writeFileSync("data/accounts.json", JSON.stringify(accounts));
+        fs.writeFileSync(patch, JSON.stringify(accounts));
+        
 
         res.send({
             success: true,

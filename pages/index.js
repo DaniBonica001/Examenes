@@ -18,7 +18,7 @@ export default function Home() {
         <div className={styles.grid}>
           <div className={styles.card}>
             <h2>Login</h2>
-
+            
             <LoginForm/>
 
           </div>

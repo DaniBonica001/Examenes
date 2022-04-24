@@ -2,14 +2,24 @@ const fs = require('fs');
 
 export default function Login(req, res) {
 
-    let accounts = JSON.parse(fs.readFileSync("data/accounts.json"));
+    let accounts;
+    let patch = "data/teacher.json";
     const {method, body} = req;
-    
+
     if(method === 'POST'){
+        if(body.toggle1){
+            accounts = JSON.parse(fs.readFileSync(patch));
+
+        }else{
+            patch = "data/accounts.json";
+            accounts = JSON.parse(fs.readFileSync(patch));
+        }
+        
         accounts.forEach(element => {
             if(element.username === body.username && element.password === body.password){
                 res.send({
                     success: true,
+                    toggle: body.toggle1,
                     message: "Login Successful"
                 })
     
@@ -20,6 +30,7 @@ export default function Login(req, res) {
             success: false,
             message: "Login Failed"
         })
+
     }
    
 

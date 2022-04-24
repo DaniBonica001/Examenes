@@ -1,16 +1,25 @@
 import react from "react"
 
+
 export default class LoginForm extends react.Component{
 
     state = {
         username: '',
         password: '',
+        toggle1: false
     }
 
     handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+        if(event.target.name === 'toggle1'){
+            this.setState({
+                toggle1: event.target.checked
+            })
+        }else{
+            this.setState({
+                [event.target.name]: event.target.value
+            }
+        )}
+        
     }
 
     handleSubmit = async (event) => {
@@ -27,7 +36,12 @@ export default class LoginForm extends react.Component{
         const body = await response.json()
 
         if(body.success){
-            window.location.href = '/signUp'
+            if(body.toggle){
+                window.location.href = '/signUp'
+            }else{
+                window.location.href = 'https://www.youtube.com/watch?v=Y2FpY61h5Z8&ab_channel=UskoKruM2010'
+            }
+            
         }
     }
 
@@ -38,6 +52,10 @@ export default class LoginForm extends react.Component{
                 <form onSubmit={this.handleSubmit}>
                     <div><input type="username" name="username" placeholder="Username" onChange={this.handleChange} /></div>
                     <div><input type="password" name="password" placeholder="Password" onChange={this.handleChange}/></div>
+                    <div>
+                        <input type="checkbox" name="toggle1" onChange={this.handleChange} id="xd"/>
+
+                    </div>
 
                     <button type="submit">Login</button>
                     

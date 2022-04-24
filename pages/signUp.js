@@ -11,11 +11,11 @@ export default function Home() {
         name: '',
         username: '',
         password: '',
+        toggle1: true
     }
 
     async function handleSubmit(event) {
         event.preventDefault();
-        //console.log(data)
         const response = await fetch('/api/account/verifyAccount', {
             method: 'POST',
             body: JSON.stringify({ data }),
@@ -25,7 +25,6 @@ export default function Home() {
             }
         })
         const responseData = await response.json();
-        console.log(responseData.success)
 
         if(responseData.success){
             window.location.href = '/'
@@ -45,9 +44,13 @@ export default function Home() {
             case 'password':
                 data.password = event.target.value;
                 break;
+            case 'toggle1':
+                data.toggle1 = event.target.checked;
+                break;
             default:
                 break;
         }
+        console.log(data.toggle1)
     };
 
 
@@ -71,6 +74,10 @@ export default function Home() {
                             <input id="name" type="text" name='name' placeholder="Full Name" onChange={handleChange} />
                             <input id="username" type="text" name='username' placeholder="username" onChange={handleChange} />
                             <input id="password" type="password" name='password' placeholder="Password" onChange={handleChange}/>
+                            <div>
+                                <input type="checkbox" name="toggle1" onChange={handleChange}/>
+
+                            </div>
                             <br />
                             <input type="submit" value="Create" />
                         </div>
