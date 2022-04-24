@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 
 
 
-export default function Home() {
+export default function SingUp() {
 
     let data = {
         id: 0,

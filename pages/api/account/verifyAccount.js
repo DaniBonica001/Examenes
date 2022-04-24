@@ -27,12 +27,25 @@ export default function handler(req,res){
             }
         });
 
-        accounts.push({
-            id: accounts.length + 1,
-            name: data.name,
-            username: data.username,
-            password: data.password,
-        });
+        if(data.toggle1){
+            accounts.push({
+                id: accounts.length + 1,
+                name: data.name,
+                username: data.username,
+                password: data.password,
+                exam: []
+            });
+            
+        }else{
+            accounts.push({
+                id: accounts.length + 1,
+                name: data.name,
+                username: data.username,
+                password: data.password,
+            });
+        }
+
+        
 
         fs.writeFileSync(patch, JSON.stringify(accounts));
         
