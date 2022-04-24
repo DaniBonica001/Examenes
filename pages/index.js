@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import LoginForm from '../components/LoginForm'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -14,20 +15,11 @@ export default function Home() {
 
       <main className={styles.main}>
         <h2 className={styles.title}>Examns</h2>
-
         <div className={styles.grid}>
           <div className={styles.card}>
             <h2>Login</h2>
 
-            <input id="username" type="text" placeholder="Username" />
-            <input id="password" type="password" placeholder="Password" />
-            <br />
-            <div class="toggle">
-              <input text="Student" type="checkbox" id="toggle" />
-
-            </div>
-            <button id="loginButton">Login</button>
-            <a href="https://nextjs.org">Click here to Sign Up</a>
+            <LoginForm/>
 
           </div>
 

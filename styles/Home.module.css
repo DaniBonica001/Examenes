@@ -126,7 +126,7 @@
   cursor: pointer;
   transition: background 250ms, box-shadow 250ms;
   bottom: -0.5rem;
-  left: 3.7rem;
+  left: 0rem;
 }
 
 .card input{
