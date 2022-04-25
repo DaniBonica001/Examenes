@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home(data) {
 
@@ -14,6 +15,9 @@ export default function Home(data) {
 
       <main>
         <h1>teacher</h1>
+        <Link href='/'>
+          <input type="submit" value="Log out" />
+        </Link>
       </main>
 
 
