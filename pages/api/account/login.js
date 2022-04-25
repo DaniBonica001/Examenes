@@ -19,6 +19,7 @@ export default function Login(req, res) {
             if(element.username === body.username && element.password === body.password){
                 res.send({
                     success: true,
+                    username: element.username,
                     toggle: body.toggle1,
                     message: "Login Successful"
                 })

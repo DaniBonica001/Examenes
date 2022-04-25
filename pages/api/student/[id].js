@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 export default async function Found (req, res){
-    const data = await JSON.parse(fs.readFileSync("data/teacher.json"));
+    const data = await JSON.parse(fs.readFileSync("data/accounts.json"));
     const {id} = req.query;
     
     data.forEach(element => {

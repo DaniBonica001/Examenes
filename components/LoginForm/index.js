@@ -37,9 +37,9 @@ export default class LoginForm extends react.Component{
 
         if(body.success){
             if(body.toggle){
-                window.location.href = '/signUp'
+                window.location.href = '/teacher/' + body.username
             }else{
-                window.location.href = 'https://www.youtube.com/watch?v=Y2FpY61h5Z8&ab_channel=UskoKruM2010'
+                window.location.href = '/student/' + body.username
             }
             
         }
@@ -48,7 +48,7 @@ export default class LoginForm extends react.Component{
     render(){
 
         return(
-            <>
+            <div>
                 <form onSubmit={this.handleSubmit}>
                     <div><input type="username" name="username" placeholder="Username" onChange={this.handleChange} /></div>
                     <div><input type="password" name="password" placeholder="Password" onChange={this.handleChange}/></div>
@@ -69,7 +69,7 @@ export default class LoginForm extends react.Component{
                 
                 `}</style>
 
-            </>
+            </div>
 
 
         )
