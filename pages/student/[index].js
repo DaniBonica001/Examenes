@@ -17,7 +17,7 @@ export default function Home(data) {
         </div>
       </nav>
 
-      <body>
+      <div>
         <br/>
         <div className="card" style={{width: "350px", height:"200px"}}>
           <div className="card-body">
@@ -28,7 +28,7 @@ export default function Home(data) {
             <a href="#" className="card-link">Another link</a>
           </div>
         </div>
-      </body>
+      </div>
 
 
     </div>
