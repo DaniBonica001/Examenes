@@ -36,7 +36,9 @@ export default class ExamForm extends react.Component{
     render(){
 
         return(
-            <div className="container"></div>
+            <div className="container">
+                <h1>Hola</h1>
+            </div>
 
         )
     }

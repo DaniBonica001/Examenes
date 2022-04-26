@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-export default function Login(req, res) {
+export default async function Login(req, res) {
 
     let accounts;
     let patch = "data/teacher.json";
@@ -8,11 +8,11 @@ export default function Login(req, res) {
 
     if(method === 'POST'){
         if(body.toggle1){
-            accounts = JSON.parse(fs.readFileSync(patch));
+            accounts = await JSON.parse(fs.readFileSync(patch));
 
         }else{
             patch = "data/accounts.json";
-            accounts = JSON.parse(fs.readFileSync(patch));
+            accounts = await JSON.parse(fs.readFileSync(patch));
         }
         
         accounts.forEach(element => {

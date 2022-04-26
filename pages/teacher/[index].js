@@ -15,6 +15,10 @@ export default function Home(data) {
 
       <main>
         <h1>teacher</h1>
+        <Link href='https://www.youtube.com/watch?v=MFuwkrseXVE&t=2492s&ab_channel=Academind'>
+          <input type="submit" value="Create a new examn" />
+        </Link>
+        <br/>
         <Link href='/'>
           <input type="submit" value="Log out" />
         </Link>
