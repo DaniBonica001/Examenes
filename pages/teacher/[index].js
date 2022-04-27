@@ -14,10 +14,10 @@ export default function Home({data}) {
 
 
       <main>
-        <h1>teacher</h1>
-        <Link href='/'>
-          <input type="submit" value="Log out" />
-        </Link>
+        <h1 style = "text-align:center"> TEACHER </h1>
+          <Link href='/'>
+            <input type="submit" value="Log out" />
+          </Link>
       </main>
 
 
