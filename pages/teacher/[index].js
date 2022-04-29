@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Home({data}) {
+export default function Home({ data }) {
 
   return (
     <div >
@@ -15,18 +15,22 @@ export default function Home({data}) {
 
 
       <main>
-        <h1 style = "text-align:center"> TEACHER </h1>
-          <Link href='/'>
-            <input type="submit" value="Log out" />
-          </Link>
+        <h1>teacher</h1>
+        <Link href='https://www.youtube.com/watch?v=MFuwkrseXVE&t=2492s&ab_channel=Academind'>
+          <input type="submit" value="Create a new examn" />
+        </Link>
+        <br />
+        <Link href='/'>
+          <input type="submit" value="Log out" />
+        </Link>
       </main>
 
       <div>
-        <br/>
+        <br />
         <Grid container spacing={2}>
           {data.exam.map(t => (
             <Grid item key={t.name} xs={6} md={4}>
-              <div className="card" style={{width: "350px", height:"200px"}}>
+              <div className="card" style={{ width: "350px", height: "200px" }}>
                 <div className="card-body">
                   <h5 className="card-title">{t.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -38,7 +42,7 @@ export default function Home({data}) {
             </Grid>
           ))}
         </Grid>
-       
+
       </div>
 
 
@@ -51,6 +55,6 @@ Home.getInitialProps = async (req, res) => {
   const response = await fetch('http://localhost:3000/api/teacher/' + req.query.index)
   const data = await response.json()
   return { data }
-  
+
 }
 
