@@ -1,39 +1,39 @@
-const fs = require('fs');
+import {db} from '../../util/database'
 
 export default async function Login(req, res) {
 
-    let accounts;
-    let patch = "data/teacher.json";
+    let accounts;    
     const {method, body} = req;
+    const data = req.body.data;    
 
-    if(method === 'POST'){
-        if(body.toggle1){
-            accounts = await JSON.parse(fs.readFileSync(patch));
+    if(method === 'POST'){            
 
-        }else{
-            patch = "data/accounts.json";
-            accounts = await JSON.parse(fs.readFileSync(patch));
+        if(data.toggle1){            
+            console.log("teacher");
+            accounts = await db.query('SELECT * FROM TEACHER t WHERE t.USERNAME = $1', [data.username])
+
+        }else{    
+            console.log("student");        
+            accounts = await db.query('SELECT * FROM STUDENT s WHERE s.USERNAME = $1', [data.username]);
         }
-        
-        accounts.forEach(element => {
-            if(element.username === body.username && element.password === body.password){
-                res.send({
-                    success: true,
-                    username: element.username,
-                    toggle: body.toggle1,
-                    message: "Login Successful"
-                })
-    
-            }
-        });
 
-        res.send({
-            success: false,
-            message: "Login Failed"
-        })
+        console.log(accounts);
 
+        if (accounts.rows.length>0){
+            console.log('Existe');
+
+            res.send({
+                success: true,
+                username: data.username,
+                toggle: data.toggle1,
+                message: "Login Successful"
+            })
+        }else{
+            console.log('No existe');
+            res.send({
+                success: false,
+                message: "Login Failed"
+            })
+        }
     }
-   
-
-
 }

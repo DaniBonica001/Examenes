@@ -1,7 +1,7 @@
-import {Component, useState} from 'react'
-import Question from './Question'
+import react from "react"
 
-export default class QuestionsBox extends Component{
+
+export default class QuestionsBox extends react.Component{
     render(){
         const [components, setComponents] = useState(["Sample"])
 

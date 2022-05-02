@@ -1,12 +1,20 @@
-const fs = require('fs');
+import {db} from '../../util/database'
 
 export default async function Found (req, res){
 
-    const student = await JSON.parse(fs.readFileSync("data/accounts.json"));
-    const teacher = await JSON.parse(fs.readFileSync("data/teacher.json"));
+    //const student = await JSON.parse(fs.readFileSync("../../util/accounts.json"));
+    //const teacher = await JSON.parse(fs.readFileSync("../../util/teacher.json"));
     
-    let exams = [];
-    
+    //let exams = [];
+
+    const query = await db.query('SELECT * FROM EXAMN');   
+
+    if (query.rows>0){
+        res.send(query.rows);
+    }else{
+        res.send("No hay exámenes para mostrar");
+    }
+    /*
     student.forEach(element => {
         if(element.username === req.query.id){
 
@@ -26,8 +34,7 @@ export default async function Found (req, res){
             res.json(JSON.stringify([element, exams]))
         }
     });
-
-    res.send("No user found");
+    */  
 
 
 }

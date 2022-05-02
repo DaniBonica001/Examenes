@@ -14,7 +14,7 @@ export default function SingUp() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        const response = await fetch('/api/account/verifyAccount', {
+        const response = await fetch('http://localhost:3000/api/account/verifyAccount', {    
             method: 'POST',
             body: JSON.stringify({ data }),
             headers: {
@@ -48,7 +48,7 @@ export default function SingUp() {
             default:
                 break;
         }
-        console.log(data.toggle1)
+        console.log('VALOR DEL TOGGLE: '+data.toggle1);
     };
 
 

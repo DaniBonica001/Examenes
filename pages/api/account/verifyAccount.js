@@ -1,60 +1,67 @@
-const fs = require('fs');
+import {db} from '../../util/database'
 
-export default function handler(req,res){
+
+export default async function handler(req, res) {
 
     let accounts;
-    let patch = "data/teacher.json";
-    const {method, body} = req;
+    let patch = "../../util/teacher.json";
+    const { method, body } = req;
     const data = body.data;
 
-    if(method === 'POST'){
+    if (method === 'POST') {
 
-        if(data.toggle1){
-            accounts = JSON.parse(fs.readFileSync(patch));
-            
-        }else{
-            patch = "data/accounts.json";
-            accounts = JSON.parse(fs.readFileSync(patch));
+        console.log('valor antes de'+data.toggle1);
+
+        if (data.toggle1) {
+            console.log('kio');            
+            accounts = await db.query('SELECT * FROM TEACHER t WHERE t.USERNAME = $1', [data.username])
+
+        } else {
+            console.log('hola');
+            patch = "../../util/accounts.json";
+            accounts = await db.query('SELECT * FROM STUDENT s WHERE s.USERNAME = $1', [data.username]);
+
         }
 
-        accounts.forEach(element => {
-            if(element.username === data.username || data.username === '' || data.password === '' || data.name === ''){
-                res.send({
-                    success: false,
-                    message: "SingUp Failed"
-                })
+        //console.log(accounts);
 
+        if (accounts.rows[0] === undefined) {
+
+            if (data.toggle1) {
+
+                let insert = await db.query('INSERT INTO TEACHER(NAME,USERNAME,PASSW) VALUES($1,$2,$3)',[data.name, data.username, data.password]);               
+
+                /*
+
+                accounts.push({
+                    id: accounts.length + 1,
+                    name: data.name,
+                    username: data.username,
+                    password: data.password,
+                    exam: []
+                });
+                */
+    
+            } else {
+                let insert = await db.query('INSERT INTO STUDENT(NAME,USERNAME,PASSW) VALUES($1,$2,$3)',[data.name, data.username, data.password]);               
             }
-        });
 
-        if(data.toggle1){
-            accounts.push({
-                id: accounts.length + 1,
-                name: data.name,
-                username: data.username,
-                password: data.password,
-                exam: []
-            });
-            
+            res.send({
+                success: true,
+                message: "SingUp Successful"
+            })
+           
         }else{
-            accounts.push({
-                id: accounts.length + 1,
-                name: data.name,
-                username: data.username,
-                password: data.password,
-            });
-        }
+
+            res.send({
+                success: false,
+                message: "SingUp Failed"
+            })
+           
+        }        
 
         
-
-        fs.writeFileSync(patch, JSON.stringify(accounts));
-        
-
-        res.send({
-            success: true,
-            message: "SingUp Successful"
-        })
 
     }
-    
+
 }

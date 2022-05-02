@@ -16,7 +16,7 @@ export default function Home({ data }) {
 
       <main>
         <h1>teacher</h1>
-        <Link href='https://www.youtube.com/watch?v=MFuwkrseXVE&t=2492s&ab_channel=Academind'>
+        <Link href='/teacher/newExamn'>
           <input type="submit" value="Create a new examn" />
         </Link>
         <br />
@@ -51,8 +51,14 @@ export default function Home({ data }) {
 }
 
 Home.getInitialProps = async (req, res) => {
+  let config = {    
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  }
 
-  const response = await fetch('http://localhost:3000/api/teacher/' + req.query.index)
+  const response = await fetch('/api/teacher/' + req.query.index,config);
   const data = await response.json()
   return { data }
 

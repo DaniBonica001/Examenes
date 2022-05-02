@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 
 
-export default function Home({data}) {
+export default function Home({ data }) {
 
   return (
     <div>
@@ -19,11 +19,11 @@ export default function Home({data}) {
       </nav>
 
       <div>
-        <br/>
+        <br />
         <Grid container spacing={2}>
           {data[1].map(t => (
             <Grid item key={t.name} xs={6} md={4}>
-              <div className="card" style={{width: "350px", height:"200px"}}>
+              <div className="card" style={{ width: "350px", height: "200px" }}>
                 <div className="card-body">
                   <h5 className="card-title">{t.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -35,28 +35,25 @@ export default function Home({data}) {
             </Grid>
           ))}
         </Grid>
-       
+
       </div>
 
 
     </div>
-
-
-
-
-
-
-
-
   );
 }
 Home.getInitialProps = async (req, res) => {
+  let config = {    
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  }
 
-  const response = await fetch('http://localhost:3000/api/student/' + req.query.index)
-  
+  const response = await fetch('/api/student/' + req.query.index,config);
   const data = await response.json()
 
-  return {data}
+  return { data }
 
 }
 
