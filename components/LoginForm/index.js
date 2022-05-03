@@ -48,10 +48,10 @@ export default class LoginForm extends react.Component{
             
             if(body.toggle){
                 
-                window.location.href = '/teacher/' + body.username
+                window.location.href = 'http://localhost:3000/teacher/' + body.username
             }else{
                 
-                window.location.href = '/student/' + body.username
+                window.location.href = 'http://localhost:3000/student/' + body.username
             }
             
         }
