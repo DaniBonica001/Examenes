@@ -17,7 +17,7 @@ export default async function Login(req, res) {
             accounts = await db.query('SELECT * FROM STUDENT s WHERE s.USERNAME = $1', [data.username]);
         }
 
-        console.log(accounts);
+        //console.log(accounts);
 
         if (accounts.rows.length>0){
             console.log('Existe');

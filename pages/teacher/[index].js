@@ -28,7 +28,7 @@ export default function Home({ data }) {
       <div>
         <br />
         <Grid container spacing={2}>
-          {data.exam.map(t => (
+          {data.map(t => (
             <Grid item key={t.name} xs={6} md={4}>
               <div className="card" style={{ width: "350px", height: "200px" }}>
                 <div className="card-body">
@@ -42,6 +42,7 @@ export default function Home({ data }) {
             </Grid>
           ))}
         </Grid>
+       
 
       </div>
 
@@ -51,16 +52,15 @@ export default function Home({ data }) {
 }
 
 Home.getInitialProps = async (req, res) => {
-  let config = {    
+  const response = await fetch('http://localhost:3000/api/teacher/' + req.query.index, {
+
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-  }
+  });
 
-  const response = await fetch('/api/teacher/' + req.query.index,config);
-  const data = await response.json();
-  console.log(data);
+  const data = await response.json()
   return { data }
 
 }
