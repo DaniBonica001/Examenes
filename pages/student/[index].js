@@ -21,7 +21,7 @@ export default function Home({ data }) {
       <div>
         <br />
         <Grid container spacing={2}>
-          {data[1].map(t => (
+          {data.map(t => (
             <Grid item key={t.name} xs={6} md={4}>
               <div className="card" style={{ width: "350px", height: "200px" }}>
                 <div className="card-body">
