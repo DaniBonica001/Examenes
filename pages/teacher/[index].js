@@ -59,7 +59,8 @@ Home.getInitialProps = async (req, res) => {
   }
 
   const response = await fetch('/api/teacher/' + req.query.index,config);
-  const data = await response.json()
+  const data = await response.json();
+  console.log(data);
   return { data }
 
 }
