@@ -41,14 +41,16 @@ export default class LoginForm extends react.Component{
             }
         })
         
-        const body = await response.json();       
+        const body = await response.json();   
+        
+        console.log(body);
 
         if(body.success){
 
             
             if(body.toggle){
                 
-                window.location.href = '/teacher/' + body.username
+                window.location.href = '/teacher/' + body   .username
             }else{
                 
                 window.location.href = '/student/' + body.username
