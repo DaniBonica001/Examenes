@@ -41,7 +41,9 @@ export default class LoginForm extends react.Component{
             }
         })
         
-        const body = await response.json();       
+        const body = await response.json();   
+        
+        console.log(body);
 
         if(body.success){
 
