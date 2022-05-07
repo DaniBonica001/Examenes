@@ -10,8 +10,6 @@ export default async function handler(req, res) {
 
     if (method === 'POST') {
 
-        console.log('valor antes de'+data.toggle1);
-
         if (data.toggle1) {
             console.log('kio');            
             accounts = await db.query('SELECT * FROM TEACHER t WHERE t.USERNAME = $1', [data.username])

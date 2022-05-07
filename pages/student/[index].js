@@ -1,9 +1,42 @@
 import { Grid } from '@mui/material';
 import Link from 'next/link'
+import { continueSession } from 'pg/lib/sasl';
 import styles from '../../styles/Home.module.css'
 
 
-export default function Home({ data }) {
+export default function Student({ data }) {
+
+  let info = {
+    id: '',
+    password: '',
+    
+  }
+
+  let handleChange = (event) => {
+    info.password = event.target.value;
+
+  };
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    info.id = event.target.id;
+   
+    const response = await fetch('http://localhost:3000/api/student/verifyExam', {    
+        method: 'POST',
+        body: JSON.stringify({ info }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+
+    const responseData = await response.json();
+    console.log(responseData);
+
+    if(responseData.success){
+        window.location.href = 'http://localhost:3000/exam/' + responseData.id;
+    }
+  }
 
   return (
     <div>
@@ -28,8 +61,8 @@ export default function Home({ data }) {
                   <h5 className="card-title">{t.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
                   <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" className="card-link">Card link</a>
-                  <a href="#" className="card-link">Another link</a>
+                  <a onClick={handleSubmit} className="card-link" id ={t.idexamn}>Present</a>
+                  <input type="text" name="password" placeholder="Password" onChange={handleChange}/>
                 </div>
               </div>
             </Grid>
@@ -42,7 +75,10 @@ export default function Home({ data }) {
     </div>
   );
 }
-Home.getInitialProps = async (req, res) => {
+
+
+
+Student.getInitialProps = async (req, res) => {
   const response = await fetch('http://localhost:3000/api/student/' + req.query.index, {
 
     headers: {
