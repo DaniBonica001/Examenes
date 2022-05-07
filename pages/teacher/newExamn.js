@@ -1,27 +1,53 @@
-import { Grid } from '@mui/material'
+import { Fab, AddIcon } from '@mui/material'
 import styles from '../../styles/Home.module.css'
 import Head from 'next/head'
+
+let data = {
+    identifier: '',
+    password: '',
+    title: '',
+    description: ''
+}
 
 let handleChange = (event) => {
 
     switch (event.target.name) {
-        case 'name':
-            data.name = event.target.value;
-            break;
-        case 'username':
-            data.username = event.target.value;
+        case 'identifier':
+            data.identifier = event.target.value;
             break;
         case 'password':
             data.password = event.target.value;
             break;
-        case 'toggle1':
-            data.toggle1 = event.target.checked;
+        case 'title':
+            data.title = event.target.value;
             break;
+        case 'description':
+            data.description = event.target.value;
         default:
             break;
     }
-    console.log('VALOR DEL TOGGLE: '+data.toggle1);
 };
+
+let addQuestion = (event) => {
+    
+}
+
+async function handleSubmit(event) {
+    event.preventDefault();
+    const response = await fetch('http://localhost:3000/api/teacher/[id]', {    
+        method: 'POST',
+        body: JSON.stringify({ data }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    const responseData = await response.json();
+
+    if(responseData.success){
+        window.location.href = '/'
+    }
+}
 
 
 export default function Home(data) {
@@ -39,17 +65,26 @@ export default function Home(data) {
 
                     <div className = {styles.grid}>
                         <div className = {styles.card}>
-                            <h2> Lets' create your account </h2>
-
-                            <input id="examIdentifier" type="text" name='name' placeholder="Exam Identifier" onChange={handleChange} />
-                            <input id="examPassword" type="text" name='username' placeholder="Password" onChange={handleChange} />
-                            <input id="examTitle" type="text" name='password' placeholder="Title" onChange={handleChange}/>
+                            <h2> Lets' create a new examn </h2>
+                            
+                            <input id="identifier" type="text" name='identifier' placeholder="Exam Identifier" onChange={handleChange} />
+                            <input id="password" type="text" name='password' placeholder="Password" onChange={handleChange} />
+                            <input id="title" type="text" name='title' placeholder="Title" onChange={handleChange}/>
+                            <input id="description" type="text" name='description' placeholder="Description" onChange={handleChange}/>
                             <div>
-                                <input type="checkbox" name="toggle1" onChange={handleChange}/>
-
+                                <input id="question" type="text" name='question' placeholder="New Question" onChange={handleChange}/>
+                                <span>
+                                    <button type = "submit"> + </button>
+                                </span>
                             </div>
-                            <br />
-                            <input type="submit" value="Create" />
+                            
+                            {/* <Fab size="small" color="secondary" aria-label="add">
+                                <AddIcon />
+                            </Fab> */}
+                            <p>
+                                <br />
+                                <input type="submit" value="Create" />
+                            </p>
                         </div>
                     </div>
                 </form>
